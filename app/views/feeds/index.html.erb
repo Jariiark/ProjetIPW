@@ -16,9 +16,9 @@
       <tr>
         <td><%= feed.title %></td>
         <td><%= feed.url %></td>
-        <td><%= link_to 'Show', feed %></td>
-        <td><%= link_to 'Edit', edit_feed_path(feed) %></td>
-        <td><%= link_to 'Destroy', feed, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', feed, class: 'btn btn-primatu btn-xs' %></td>
+        <td><%= link_to 'Edit', edit_feed_path(feed), class: 'btn btn-primatu btn-xs' %></td>
+        <td><%= link_to 'Destroy', feed, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primatu btn-xs' %></td>
       </tr>
     <% end %>
   </tbody>

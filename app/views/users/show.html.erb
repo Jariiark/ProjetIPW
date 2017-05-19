@@ -3,12 +3,18 @@
   <tr>
     <td class="main">
       <h1>
-             <%= @user.nom %>
+          <% unless @user.feeds.empty? %>
+        <table class="microposts" summary="Flux RSS de l'utilisateur">
+          <%= render @feeds %>
+        </table>
+        <%= will_paginate @feeds %>
+      <% end %>
       </h1>
     </td>
     <td class="sidebar round">
       <strong>Nom</strong> <%= @user.nom %><br />
       <strong>URL</strong>  <%= link_to user_path(@user), @user %>
+      <strong>Messages</strong> <%= @user.feeds.count %>
     </td>
   </tr>
 </table>

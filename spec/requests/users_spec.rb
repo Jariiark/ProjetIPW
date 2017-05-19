@@ -49,7 +49,7 @@ describe "Users" do
 
     describe "le succès" do
       it "devrait identifier un utilisateur puis le déconnecter" do
-        user = Factory(:user)
+        
         visit signin_path
         fill_in "eMail",    :with => user.email
         fill_in "Mot de passe", :with => user.password

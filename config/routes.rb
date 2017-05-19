@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :feeds
   resources :users
   resources :sessions, :only => [:new, :create, :destroy]
+  resources :feeds, :only => [:create, :destroy]
   #get 'pages/home'
   #get 'pages/sessions'
   #get 'pages/contact'

@@ -170,6 +170,28 @@ require 'rails_helper'
       end
     end
   end
+  describe "les associations au flux" do
+
+    before(:each) do
+      @user = User.create(@attr)
+    end
+
+    it "devrait avoir un attribut 'feeds'" do
+      @user.should respond_to(:feeds)
+    end
+    it "devrait avoir les bons micro-messags dans le bon ordre" do
+      ]
+    end
+  end
+  describe "Etat" do
+	it "devrait avoir une methode alim" do
+		@user.should respond_to(:alim)
+	end
+  it "ne devrait pas inclure les feeds d'un autre utilisateur" do
+        
+        
+      end
+  
 end
 
 

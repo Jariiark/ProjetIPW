@@ -32,6 +32,9 @@ RSpec.describe UsersController do
       get :show, :id => @user
       response.should have_selector("h1", :content => @user.nom)
     end
+    it "devrait afficher les feeds de l'utilisateur" do
+     get :show, :id =>user
+    end
   end
   describe "POST 'create'" do
 

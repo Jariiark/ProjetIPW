@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   attr_accessor :password
-  #accepts_nested_attributes_for :nom, :email, :password, :password_confirmation
+  has_many :feeds 
   validates :nom, :presence => true, :uniqueness => true, :length => {:maximum => 50}
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, :presence => true, :uniqueness => { :case_sensitive => false }, :format => { :with => VALID_EMAIL_REGEX }
@@ -20,6 +20,10 @@ class User < ApplicationRecord
   def self.authenticate_with_salt(id, cookie_salt)
     user = find_by_id(id)
     (user && user.salt == cookie_salt) ? user : nil
+  end
+  def alim
+    Feed.where("user_id= ?",id)
+    #feeds
   end
    private
 
@@ -50,5 +54,6 @@ class User < ApplicationRecord
     user = find_by_id(id)
     (user && user.salt == cookie_salt) ? user : nil
   end
+  
 end                 
 

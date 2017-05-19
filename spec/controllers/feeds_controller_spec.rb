@@ -25,117 +25,82 @@ require 'rails_helper'
 
 RSpec.describe FeedsController, type: :controller do
 
-  # This should return the minimal set of attributes required to create a valid
-  # Feed. As you add validations to Feed, be sure to
-  # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
+render_views
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
+  describe "contrôle d'accès" do
 
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # FeedsController. Be sure to keep this updated too.
-  let(:valid_session) { {} }
+    it "devrait refuser l'accès pour  'create'" do
+      post :create
+      response.should redirect_to(signin_path)
+    end
 
-  describe "GET #index" do
-    it "returns a success response" do
-      feed = Feed.create! valid_attributes
-      get :index, params: {}, session: valid_session
-      expect(response).to be_success
+    it "devrait refuser l'accès pour  'destroy'" do
+      delete :destroy, :id => 1
+      response.should redirect_to(signin_path)
     end
   end
+  describe "POST 'create'" do
 
-  describe "GET #show" do
-    it "returns a success response" do
-      feed = Feed.create! valid_attributes
-      get :show, params: {id: feed.to_param}, session: valid_session
-      expect(response).to be_success
-    end
-  end
 
-  describe "GET #new" do
-    it "returns a success response" do
-      get :new, params: {}, session: valid_session
-      expect(response).to be_success
-    end
-  end
 
-  describe "GET #edit" do
-    it "returns a success response" do
-      feed = Feed.create! valid_attributes
-      get :edit, params: {id: feed.to_param}, session: valid_session
-      expect(response).to be_success
-    end
-  end
+    describe "échec" do
 
-  describe "POST #create" do
-    context "with valid params" do
-      it "creates a new Feed" do
-        expect {
-          post :create, params: {feed: valid_attributes}, session: valid_session
-        }.to change(Feed, :count).by(1)
+      before(:each) do
+        @attr = { :url => "" }
       end
 
-      it "redirects to the created feed" do
-        post :create, params: {feed: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(Feed.last)
+      it "ne devrait pas créer de flux" do
+        lambda do
+          post :create, :feed => @attr
+        end.should_not change(Feed, :count)
+      end
+
+      it "devrait retourner la page d'accueil" do
+        post :create, :feed => @attr
+        response.should render_template('pages/home')
       end
     end
 
-    context "with invalid params" do
-      it "returns a success response (i.e. to display the 'new' template)" do
-        post :create, params: {feed: invalid_attributes}, session: valid_session
-        expect(response).to be_success
+    describe "succès" do
+
+
+
+      it "devrait créer un flux" do
+        lambda do
+          post :create, :feed => @attr
+        end.should change(Feed, :count).by(1)
+      end
+
+      it "devrait rediriger vers la page d'accueil" do
+        post :create, :feed => @attr
+        response.should redirect_to(root_path)
+      end
+
+      it "devrait avoir un message flash" do
+        post :create, :feed => @attr
+        flash[:success].should =~ /enregistré/i
       end
     end
   end
+ describe "DELETE 'destroy'" do
 
-  describe "PUT #update" do
-    context "with valid params" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+    describe "pour un utilisateur non auteur du message" do
 
-      it "updates the requested feed" do
-        feed = Feed.create! valid_attributes
-        put :update, params: {id: feed.to_param, feed: new_attributes}, session: valid_session
-        feed.reload
-        skip("Add assertions for updated state")
-      end
 
-      it "redirects to the feed" do
-        feed = Feed.create! valid_attributes
-        put :update, params: {id: feed.to_param, feed: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(feed)
+      it "devrait refuser la suppression du message" do
+        delete :destroy, :id => @feed
+        response.should redirect_to(root_path)
       end
     end
 
-    context "with invalid params" do
-      it "returns a success response (i.e. to display the 'edit' template)" do
-        feed = Feed.create! valid_attributes
-        put :update, params: {id: feed.to_param, feed: invalid_attributes}, session: valid_session
-        expect(response).to be_success
+    describe "pour l'auteur du message" do
+
+
+      it "devrait détruire le feed" do
+        lambda do
+          delete :destroy, :id => @feed
+        end.should change(Feed, :count).by(-1)
       end
     end
   end
-
-  describe "DELETE #destroy" do
-    it "destroys the requested feed" do
-      feed = Feed.create! valid_attributes
-      expect {
-        delete :destroy, params: {id: feed.to_param}, session: valid_session
-      }.to change(Feed, :count).by(-1)
-    end
-
-    it "redirects to the feeds list" do
-      feed = Feed.create! valid_attributes
-      delete :destroy, params: {id: feed.to_param}, session: valid_session
-      expect(response).to redirect_to(feeds_url)
-    end
-  end
-
 end

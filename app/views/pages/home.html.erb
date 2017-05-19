@@ -9,6 +9,23 @@
 <p>
   Page d'accueil
 </p>
+<% if signed_in? %>
+  <table class="front" summary="Pour utilisateur identifié">
+    <tr>
+      <td class="main">
+        <h1 class="feed">Ajouter un flux</h1>
+        <%= render 'shared/feed_form' %>
+        <%= render 'shared/alim' %>
+        
+
+      </td>
+      <td class="sidebar round">
+        <%= render 'shared/user_info' %>
+      </td>
+    </tr>
+  </table>
+
+<% else %>
 <h1>Identification</h1>
 
 <%= form_for(:session, :url => sessions_path) do |f| %>
@@ -24,7 +41,7 @@
     <%= f.submit "S'identifier" %>
   </div>
 <% end %>
-
+<%end%>
 <p>Pas encore inscrit ? <%= link_to "S'inscrire !", signup_path %></p>
 
   </body>

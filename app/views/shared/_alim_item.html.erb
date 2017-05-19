@@ -1,0 +1,18 @@
+<tr>
+  <td class="feed">
+    <span class="user">
+      <%= link_to alim_item.user.nom, alim_item.user %>
+    </span>
+    <span class="url"><%= alim_item.url %></span>
+    <span class="timestamp">
+      Posté il y a <%= time_ago_in_words(alim_item.created_at) %>.
+    </span>
+  </td>
+  <% if current_user==(alim_item.user) %>
+  <td>
+    <%= link_to "supprimer", alim_item, :method => :delete,
+                                     :confirm => "Etes-vous certain ?",
+                                     :title => alim_item.url %>
+  </td>
+  <% end %>
+</tr>

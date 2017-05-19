@@ -1,9 +1,10 @@
 class FeedsController < ApplicationController
-  before_filter :authenticate, :only => [:create, :destroy]
-  before_filter :authorized_user, :only => [:destroy, :edit]
-  def index
-     
+  before_filter :authenticate, :only => [:create, :destroy, :show,:update,:edit]
+  before_filter :authorized_user, :only => [:destroy, :edit, :show, :update]
+  before_action :set_feed, only: [:show, :edit, :update, :destroy]
+  def index  
     @feeds=Feed.all if signed_in?
+    @feeds = Feed.paginate(:page => params[:page], :per_page =>7)
   end
   def new
    @feed=Feed.new
@@ -20,8 +21,17 @@ class FeedsController < ApplicationController
       render 'pages/home'
     end
   end
-  def edit
-    @feed = Feed.find(params[:id])
+  
+  def update
+    respond_to do |format|
+      if @feed.update(feed_param)
+        format.html { redirect_to @feed, notice: 'Feed was successfully updated.' }
+        format.json { render :show, status: :ok, location: @feed }
+      else
+        format.html { render :edit }
+        format.json { render json: @feed.errors, status: :unprocessable_entity }
+      end
+    end
   end
   def destroy
     @feed.destroy
@@ -35,6 +45,9 @@ class FeedsController < ApplicationController
       redirect_to root_path unless current_user==(@feed.user)
     end
     def feed_param
-     params.require(:feed).permit(:title, :url)
+      params.require(:feed).permit(:title, :url)
+    end
+    def set_feed
+      @feed = Feed.find(params[:id])
     end
 end

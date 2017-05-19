@@ -44,6 +44,20 @@ render_views
     end
 
   end
+  describe "GET 'index'" do
+    describe "pour les users identifiés" do
+      it "devrait paginer les flux" do
+      get :index
+      response.should have_selector("div.pagination")
+        response.should have_selector("span.disabled", :content => "Previous")
+        response.should have_selector("a", :href => "/feedss?page=2",
+                                           :content => "2")
+        response.should have_selector("a", :href => "/feeds?page=2",
+                                           :content => "Next")
+      end
+    end
+  
+end
   describe "POST 'create'" do
 
 

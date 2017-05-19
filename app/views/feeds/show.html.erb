@@ -2,14 +2,14 @@
 
 <p>
   <strong>Title:</strong>
-  <%= @feed.title %>
+  <%= @feed.try(:title) %>
 </p>
 
 
 <p>
   <strong>Url:</strong>
-  <%= @feed.url %>
+  <%= @feed.try(:url) %>
 </p>
 
-<%= link_to 'Edit', edit_feed_path(@feed) %> |
+<%= link_to 'Edit', edit_feed_path %> |
 <%= link_to 'Back', feeds_path %>

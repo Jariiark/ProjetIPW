@@ -14,7 +14,8 @@ Rails.application.routes.draw do
   get '/help' => 'pages#help'
   root :to => 'pages#home'
   get 'feeds/index' => 'feeds#index'
-  
+  get 'feeds/edit' => 'feeds#edit'
+  get 'feeds/destroy' => 'feeds#destroy'
   post '/signin' => 'sessions#new'
   delete '/signout' => 'sessions#destroy'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

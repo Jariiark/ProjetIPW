@@ -8,6 +8,8 @@ class FeedsController < ApplicationController
   def new
    @feed=Feed.new
   end
+  def show
+  end
   def create
   @feed  = current_user.feeds.build(feed_param)
     if @feed.save
@@ -18,11 +20,8 @@ class FeedsController < ApplicationController
       render 'pages/home'
     end
   end
-  def show
-    @feed=Feed.find_by_permalink(params[:id])
-  end
   def edit
-    @feed = Feed.find_by_permalink(params[:id])
+    @feed = Feed.find(params[:id])
   end
   def destroy
     @feed.destroy

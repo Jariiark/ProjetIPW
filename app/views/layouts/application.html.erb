@@ -7,21 +7,28 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
-  <body>
-    <div class="container">
-      <header>
-        
-        <nav class="round">
-          <ul>
-            <li><%= link_to "Accueil", root_path %></li>
-            <li><%= link_to "Aide", help_path %></li>
-          </ul>
-        </nav>
-      </header>
-      <section class="round">
-        <%= yield %>
-      </section>
-    </div>
-  </body>
+<body>
+<div class="container">
+ <header>
+  <nav class="round">
+    <ul>
+      <li><%= link_to "Accueil", root_path %></li>
+      <% if signed_in? %>
+      <li><%= link_to "Profil", current_user %></li>
+      <li><%= link_to "Aide", help_path %></li>
+      
+      <% if signed_in? %>
+      <li><%= link_to "Déconnexion", signout_path, :method => :delete %></li>
+      <% end %>
+      <% else %>
+      <li><%= link_to "S'identifier", signout_path %></li>
+      <% end %>
+    </ul>
+  </nav>
+</header>
+<section class="round">
+	<%=yield%>
+</section>
+</div>
+</body>
 </html>

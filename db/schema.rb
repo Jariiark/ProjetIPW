@@ -16,8 +16,8 @@ ActiveRecord::Schema.define(version: 20170518082001) do
   enable_extension "plpgsql"
 
   create_table "feeds", force: :cascade do |t|
-    t.integer "feed_id", :options => 'PRIMARY KEY'
-    t.integer "user_id"
+    t.integer  "feed_id"
+    t.integer  "user_id"
     t.string   "title"
     t.string   "url"
     t.datetime "created_at", null: false
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20170518082001) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.integer "user_id", :options => 'PRIMARY KEY'
+    t.integer  "user_id"
     t.string   "nom"
     t.string   "email"
     t.datetime "created_at",         null: false

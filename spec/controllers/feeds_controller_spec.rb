@@ -38,6 +38,11 @@ render_views
       delete :destroy, :id => 1
       response.should redirect_to(signin_path)
     end
+    it "devrait refuser l'accès pour  'update'" do
+      post :update
+      response.should redirect_to(signin_path)
+    end
+
   end
   describe "POST 'create'" do
 
@@ -82,6 +87,28 @@ render_views
       end
     end
   end
+  describe "POST 'update'" do
+    describe "pour un utilisateur non auteur du message" do
+      it "devrait refuser la maj du message" do
+        post :update :id => @feed
+        response.should redirect_to(root_path)
+      end
+    end
+    describe "pour l'auteur du message" do
+
+
+      it "devrait maj le titre feed" do
+        lambda do
+          post :update, :id => @feed.title
+        end.should change(Feed, :title)
+      end
+      it "devrait maj l'url" do
+         post :update, :id =>@feed.url
+       end.should change(Feed,:url)
+      end
+    end
+  end
+
  describe "DELETE 'destroy'" do
 
     describe "pour un utilisateur non auteur du message" do

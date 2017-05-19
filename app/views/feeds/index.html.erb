@@ -1,10 +1,28 @@
-<h1>Agrégateur de flux d'actualité</h1>
+<h1>Liste des flux RSS</h1>
 
-<p>
-  Page d'accueil
-</p>
+<table>
+  <tr>
+    <th>Titre</th>
+    <th>Url</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
 
-<%= link_to "S'inscrire !", signup_path, :class => "signup_button round" %>
+<% @feeds.each do |feed| %>
+  <tr>
+    <td><%= feed.title %></td>
+    <td><%= feed.url %></td>
+    <td><%= link_to 'Montrer', feed %></td>
+    <td><%= link_to 'Modifier', edit_feed_path(feed) %></td>
+    <td><%= link_to 'Détruire', feed, :confirm => 'Êtes-vous certain ?',
+:method => :delete %></td>
+  </tr>
+<% end %>
+</table>
 
+<br />
+
+<%= link_to 'New Feed', new_feed_path %>
 
 

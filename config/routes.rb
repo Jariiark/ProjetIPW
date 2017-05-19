@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :feeds
   resources :users
   resources :sessions, :only => [:new, :create, :destroy]
-  resources :feeds, :only => [:create, :destroy]
+  resources :feeds, :only => [:create, :destroy, :edit]
   #get 'pages/home'
   #get 'pages/sessions'
   #get 'pages/contact'
@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get '/about' => 'pages#about'
   get '/help' => 'pages#help'
   root :to => 'pages#home'
+  get 'feeds/index' => 'feeds#index'
   
   post '/signin' => 'sessions#new'
   delete '/signout' => 'sessions#destroy'

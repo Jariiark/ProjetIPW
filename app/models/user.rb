@@ -25,6 +25,7 @@ class User < ApplicationRecord
     Feed.where("user_id= ?",id)
     #feeds
   end
+  
    private
 
     def encrypt_password

@@ -6,10 +6,11 @@ class PagesController < ApplicationController
 
   def home
    @title = "Accueil"
-   @feed = Feed.new if signed_in?
+   
+   
    if signed_in?
     @feed = Feed.new
-    @alim_items= current_user.alim.paginate(:page=>params[:page])
+    @alim_items=current_user.alim.paginate(:page=>params[:page])
    end
   end
 

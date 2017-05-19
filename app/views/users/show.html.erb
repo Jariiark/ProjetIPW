@@ -4,7 +4,7 @@
     <td class="main">
       <h1>
           <% unless @user.feeds.empty? %>
-        <table class="microposts" summary="Flux RSS de l'utilisateur">
+        <table class="feeds" summary="Flux RSS de l'utilisateur">
           <%= render @feeds %>
         </table>
         <%= will_paginate @feeds %>

@@ -5,7 +5,7 @@
       Posté il y a <%= time_ago_in_words(feed.created_at) %>.
     </span>
   </td>
-  <% if current_user?(feed.user) %>
+  <% if current_user==(feed.user) %>
   <td>
     <%= link_to "supprimer", feed, :method => :delete,
                                      :confirm => "Etes-vous certain ?",

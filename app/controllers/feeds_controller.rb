@@ -17,7 +17,7 @@ class FeedsController < ApplicationController
 
   def destroy
   @feed.destroy
-    redirect_back_or_root_path
+    redirect_to root_path
   end
 
   private

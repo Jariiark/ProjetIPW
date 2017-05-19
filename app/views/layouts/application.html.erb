@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Projet</title>
+    <title>ProjetRSS</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,6 +9,19 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div class="container">
+      <header>
+        
+        <nav class="round">
+          <ul>
+            <li><%= link_to "Accueil", root_path %></li>
+            <li><%= link_to "Aide", help_path %></li>
+          </ul>
+        </nav>
+      </header>
+      <section class="round">
+        <%= yield %>
+      </section>
+    </div>
   </body>
 </html>

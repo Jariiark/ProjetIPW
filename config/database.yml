@@ -23,16 +23,15 @@ default: &default
   host: localhost
   username: projetadmin
   password: 123456
-
 development:
   <<: *default
-  database: Projet_development
+  database: ProjetRSS_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
   # the same name as the operating system user that initialized the database.
-  #username: Projet
+  #username: ProjetRSS
 
   # The password associated with the postgres role (username).
   #password:
@@ -60,7 +59,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: Projet_test
+  database: ProjetRSS_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -83,6 +82,6 @@ test:
 #
 production:
   <<: *default
-  database: Projet_production
-  username: Projet
-  password: <%= ENV['PROJET_DATABASE_PASSWORD'] %>
+  database: ProjetRSS_production
+  username: ProjetRSS
+  password: <%= ENV['PROJETRSS_DATABASE_PASSWORD'] %>

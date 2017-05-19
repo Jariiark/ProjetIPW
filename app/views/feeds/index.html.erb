@@ -1,29 +1,10 @@
-<p id="notice"><%= notice %></p>
+<h1>Agrégateur de flux d'actualité</h1>
 
-<h1>Feeds</h1>
+<p>
+  Page d'accueil
+</p>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Url</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<%= link_to "S'inscrire !", signup_path, :class => "signup_button round" %>
 
-  <tbody>
-    <% @feeds.each do |feed| %>
-      <tr>
-        <td><%= feed.title %></td>
-        <td><%= feed.url %></td>
-        <td><%= link_to 'Show', feed, class: 'btn btn-primatu btn-xs' %></td>
-        <td><%= link_to 'Edit', edit_feed_path(feed), class: 'btn btn-primatu btn-xs' %></td>
-        <td><%= link_to 'Destroy', feed, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primatu btn-xs' %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
-<br>
 
-<%= link_to 'New Feed', new_feed_path %>

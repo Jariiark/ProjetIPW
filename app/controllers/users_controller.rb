@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
-    @feeds = @user.feeds.paginate(:page=> params[:page])
+    @feeds = @user.feeds.paginate(:page=> params[:page], :per_page =>7)
     @title = @user.nom
    
   end

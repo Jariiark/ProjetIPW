@@ -11,6 +11,14 @@
 </p>
 <% if signed_in? %>
   <table class="front" summary="Pour utilisateur identifié">
+    <div id="recent feeds">
+  <h3> Récemment </h3>
+  <ul>
+    <% for entry in Feed.all %>
+    <li><%= link_to h(entry.url), entry.url %></li>
+  <% end %>
+  </ul>
+</div>
     <tr>
       <td class="main">
         <h1 class="feed">Ajouter un flux</h1>

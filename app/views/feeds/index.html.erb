@@ -1,7 +1,6 @@
 <h1>Liste des flux RSS</h1>
 
 
-
 <table>
   <tr>
     <th>Titre</th>
@@ -17,18 +16,23 @@
     <td><%= feed.title %></td>
     <td><%= feed.url %></td>
     <td><%= feed.user_id %></td>
-    <td><%= link_to 'Montrer', feed %></td>
-    <td><%= link_to 'Modifier', edit_feed_path(feed) %></td>
+    
     <% if current_user==(feed.user) %>
   <td>
+    
     <%= link_to "Supprimer", feed, :method => :delete,
                                      :confirm => "Etes-vous certain ?",
                                      :title => feed.url %>
+
     <span class="timestamp">
       Posted <%= time_ago_in_words(feed.created_at) %>.
     </span>
+    <td><%= link_to 'Montrer', feed_path(feed) %></td>
+    <td><%= link_to 'Modifier', edit_feed_path(feed) %></td>
   </td>
    <% else %>
+   <td><%= link_to 'Montrer', feed_path(feed) %></td>
+    
     <td class="feed">
     
     <span class="timestamp">
@@ -47,5 +51,6 @@
 <%= will_paginate @feeds %>
 
 <%= link_to 'New Feed', new_feed_path %>
+
 
 

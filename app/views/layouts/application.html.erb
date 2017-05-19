@@ -13,21 +13,20 @@
   <nav class="round">
     <ul>
       <li><%= link_to "Accueil", root_path %></li>
+      <li><%= link_to "Aide", help_path %></li>
       <% if signed_in? %>
       <li><%= link_to "Profil", current_user %></li>
-      <li><%= link_to "Aide", help_path %></li>
+      
       
       <% if signed_in? %>
       <li><%= link_to "Déconnexion", signout_path, :method => :delete %></li>
       <% end %>
-      <% else %>
-      <li><%= link_to "S'identifier", signout_path %></li>
-      <% end %>
+      <%end%>
     </ul>
   </nav>
 </header>
 <section class="round">
-	<%=yield%>
+  <%=yield%>
 </section>
 </div>
 </body>

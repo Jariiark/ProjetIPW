@@ -38,7 +38,7 @@ render_views
       delete :destroy, :id => 1
       response.should redirect_to(signin_path)
     end
-    it "devrait refuser l'accès pour  'update'" do
+    it "devrait refuser l'accès pour  'edit'" do
       post :update
       response.should redirect_to(signin_path)
     end

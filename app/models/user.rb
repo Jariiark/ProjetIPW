@@ -25,9 +25,6 @@ class User < ApplicationRecord
     Feed.where("user_id= ?",id)
     #feeds
   end
-  def contentfeed
-    Feed.where("feed_id=?",id)
-  end
 
    private
 

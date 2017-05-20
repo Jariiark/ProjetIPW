@@ -14,7 +14,7 @@
    
   <tr>
     <td><%= feed.title %></td>
-    <td><%= feed.url %></td>
+    <td><span class="url"><%= link_to h(feed.url),feed.url %></span></td>
     <td><%= feed.user_id %></td>
     
     <% if current_user==(feed.user) %>
@@ -27,11 +27,11 @@
     <span class="timestamp">
       Posted <%= time_ago_in_words(feed.created_at) %>.
     </span>
-    <td><%= link_to 'Montrer', feed_path(feed) %></td>
+    
     <td><%= link_to 'Modifier', edit_feed_path(feed) %></td>
   </td>
    <% else %>
-   <td><%= link_to 'Montrer', feed_path(feed) %></td>
+   
     
     <td class="feed">
     

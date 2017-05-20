@@ -10,7 +10,7 @@ class PagesController < ApplicationController
    
    if signed_in?
     @feed = Feed.new
-    @alim_items=current_user.alim.paginate(:page=>params[:page])
+    @alim_items=current_user.alim.paginate(:page=>params[:page],:per_page => 5)
    end
   end
 

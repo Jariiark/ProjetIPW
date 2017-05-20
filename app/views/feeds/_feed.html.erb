@@ -1,6 +1,6 @@
 <tr>
   <td class="feed">
-    <span class="url"><%= feed.url %></span>
+    <span class="url"><%= link_to h(feed.url),feed.url %></span>
     <span class="timestamp">
       Posted <%= time_ago_in_words(feed.created_at) %>.
     </span>
@@ -19,3 +19,7 @@
     </span>
   <% end %>
 </tr>
+
+
+
+

@@ -21,10 +21,10 @@ require 'rails_helper'
       it "devrait créer un nouvel utilisateurr" do
         lambda do
           visit signup_path
-          fill_in "Nom", :with => "Example User"
-          fill_in "eMail", :with => "user@example.com"
-          fill_in "Mot de passe", :with => "foobar"
-          fill_in "Confirmation mot de passe", :with => "foobar"
+          fill_in "Nom", :with => ""
+          fill_in "eMail", :with => ""
+          fill_in "Mot de passe", :with => ""
+          fill_in "Confirmation mot de passe", :with => ""
           click_button
           response.should have_selector("div.flash.success",
                                         :content => "Bienvenue")
@@ -85,13 +85,13 @@ require 'rails_helper'
    describe "password validations" do
 
     it "devrait exiger un mot de passe" do
-      User.new(@attr.merge(:password => "", :password_confirmation => "")).
-        should_not be_valid
+      User.new(@attr.merge(:password => "", :password_confirmation => "")).should_not be_valid
+        
     end
 
     it "devrait exiger une confirmation du mot de passe qui correspond" do
-      User.new(@attr.merge(:password_confirmation => "invalid")).
-        should_not be_valid
+      User.new(@attr.merge(:password_confirmation => "invalid")).should_not be_valid
+        
     end
 
     it  "devrait rejeter les mots de passe (trop) courts" do
@@ -108,9 +108,7 @@ require 'rails_helper'
   end
   describe "password encryption" do
 
-    before(:each) do
-      @user = User.create!(@attr)
-    end
+    
 
     it "devrait avoir un attribut  mot de passe crypté" do
       @user.should respond_to(:encrypted_password)
@@ -125,7 +123,7 @@ require 'rails_helper'
       end    
 
       it "doit retourner false si les mots de passe divergent" do
-        @user.has_password?("invalide").should be_false
+        @user.has_password?("invalid").should be_false
       end 
     end
     describe "authenticate method" do

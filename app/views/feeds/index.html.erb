@@ -14,7 +14,9 @@
    
   <tr>
     <td><%= feed.title %></td>
-    <td><span class="url"><%= link_to h(feed.url),feed.url %></span></td>
+    
+    <td><span class="url"><%= link_to h(feed.url),feed.url %>-
+      </span></td>
     <td><%= feed.user_id %></td>
     
     <% if current_user==(feed.user) %>

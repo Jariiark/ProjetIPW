@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
+  resources :feeds do
+  member do
+   resources :entries, only: [:index, :show]
+  end
+end
+
   get 'sessions/new'
-  resources :feeds
+  #resources :feeds
   resources :users
   resources :sessions, :only => [:new, :create, :destroy]
   resources :feeds, :only => [:create, :destroy, :edit]
@@ -13,6 +19,9 @@ Rails.application.routes.draw do
   get '/about' => 'pages#about'
   get '/help' => 'pages#help'
   root :to => 'pages#home'
+  
+  get 'entries/index' =>'entrie#index'
+  get 'entries/show' =>'entrie#show'
   get 'feeds/index' => 'feeds#index'
   get 'feeds/edit' => 'feeds#edit'
   get 'feeds/destroy' => 'feeds#destroy'

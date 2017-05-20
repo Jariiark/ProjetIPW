@@ -1,15 +1,10 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @feed.title %>
-</p>
-
-
-<p>
-  <strong>Url:</strong>
-  <%= @feed.url %>
-</p>
+<div class="container">
+  <h3><%= link_to @feed.title, @feed.url %></h3>
+  
+  <p>
+    <%= @feed.content.html_safe  if @feed.content%>
+  </p>
+</div>
 
 <%= link_to 'Edit', edit_feed_path %> |
 <%= link_to 'Back', feeds_path %>

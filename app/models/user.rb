@@ -6,12 +6,12 @@ class User < ApplicationRecord
   validates :email, :presence => true, :uniqueness => { :case_sensitive => false }, :format => { :with => VALID_EMAIL_REGEX }
 
   validates :password, :confirmation => true, :presence => true, :length => {:within => 6..40 }
-
   before_save :encrypt_password
     
-  def has_password?(password_soumis)
-    encrypted_password == encrypt(password_soumis)
+  def has_password?(submitted_password)
+    encrypted_password == encrypt(submitted_password)
   end
+
   def self.authenticate(email, submitted_password)
     user = find_by_email(email)
     return nil  if user.nil?
@@ -21,13 +21,12 @@ class User < ApplicationRecord
     user = find_by_id(id)
     (user && user.salt == cookie_salt) ? user : nil
   end
+
   def alim
     Feed.where("user_id= ?",id)
     #feeds
   end
-
-   private
-
+  private
     def encrypt_password
       self.salt = make_salt if new_record?
       self.encrypted_password = encrypt(password)
@@ -46,15 +45,10 @@ class User < ApplicationRecord
     end
 
 
-  def clear_password
-    self.password = nil
-  end
+
   
 
-  def self.authenticate_with_salt(id, cookie_salt)
-    user = find_by_id(id)
-    (user && user.salt == cookie_salt) ? user : nil
-  end
+  
   
 end                 
 

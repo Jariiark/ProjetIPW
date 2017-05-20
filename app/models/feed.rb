@@ -1,4 +1,5 @@
 class Feed < ApplicationRecord
+has_many :entries, dependent: :destroy
  belongs_to :user
  validates :url, :presence => true
   validates :user_id, :presence => true
@@ -21,8 +22,16 @@ class Feed < ApplicationRecord
   private
   
   def self.add_entries(entries)
-    entries.each do |entry|
-      unless exists? :guid => entry.id
+    Feed.all.each do |feed|
+      content = Feedjira::Feed.fetch_and_parse(feed_url)
+      content.entries.each do|entry|
+        local_entry = feed.entries.where(title: entry.title).first_or_initialize
+        local_entry.update_attributes(content: entry.content, author: entry.author, url: entry.url, published: entry.published)
+         p "Synced Entry - #{entry.title}"
+      end
+      p "Synced Feed - #{feed.title}"
+    end
+      unless exists? :guid => feed.id
         create!(
           :name         => entry.title,
           :summary      => entry.summary,
@@ -33,4 +42,4 @@ class Feed < ApplicationRecord
       end
     end
   end
-end
+

@@ -4,6 +4,7 @@ class CreateFeeds < ActiveRecord::Migration[5.0]
       t.string :title
       t.string :url
       t.integer :user_id
+      t.text :description
       t.timestamps
     end
   add_index :feeds, :user_id

@@ -177,7 +177,7 @@ require 'rails_helper'
     it "devrait avoir un attribut 'feeds'" do
       @user.should respond_to(:feeds)
     end
-    it "devrait avoir les bons micro-messags dans le bon ordre" do
+    it "devrait avoir les bons fluxs dans le bon ordre" do
       ]
     end
   end

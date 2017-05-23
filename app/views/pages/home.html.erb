@@ -15,7 +15,7 @@
   <h3> Récemment </h3>
   <ul>
     <% for entry in Feed.all %>
-    <li><%= link_to h(entry.url), entry.url %></li>
+    <li><%= link_to h(entry.title), entry.url %></li>
   <% end %>
   </ul>
 </div>

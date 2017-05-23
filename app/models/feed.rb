@@ -2,6 +2,7 @@ class Feed < ApplicationRecord
 has_many :entries, dependent: :destroy
  belongs_to :user
  validates :url, :presence => true
+ 
   validates :user_id, :presence => true
  default_scope { order('feeds.created_at DESC') }
  def self.update_from_feed(feed_url)

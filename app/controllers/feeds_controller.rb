@@ -45,7 +45,7 @@ class FeedsController < ApplicationController
       redirect_to root_path unless current_user==(@feed.user)
     end
     def feed_param
-      params.require(:feed).permit(:title, :url)
+      params.require(:feed).permit(:title, :url,:description)
     end
     def set_feed
       @feed = Feed.find(params[:id])

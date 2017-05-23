@@ -6,6 +6,7 @@
     <th>Titre</th>
     <th>Url</th>
     <th>User</th>
+    <th>Description</th>
     <th></th>
     <th></th>
   </tr>
@@ -18,7 +19,7 @@
     <td><span class="url"><%= link_to h(feed.url),feed.url %>-
       </span></td>
     <td><%= feed.user_id %></td>
-    
+    <td><%= feed.description %></td>
     <% if current_user==(feed.user) %>
   <td>
     

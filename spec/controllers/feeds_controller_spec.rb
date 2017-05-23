@@ -120,6 +120,11 @@ end
          post :update, :id =>@feed.url
        end.should change(Feed,:url)
       end
+      it "devrait maj la description feed" do
+        lambda do
+          post :update, :id => @feed.description
+        end.should change(Feed, :description)
+      end
     end
   end
 
